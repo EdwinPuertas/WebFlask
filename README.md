@@ -1,1 +1,1 @@
-# WebFlask
+# Example Editorial in Flask

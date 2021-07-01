@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<div class="page-header">
+    <h1>Person Form</h1>
+    <p>Enter your First Name and Last Name:   </p>
+        <br>
+
+        <form action="/hello" method="post">
+            First Name: <input type="text" name="first_name">  <br />
+            Last Name: <input  type="text" name="last_name" /><br />
+            <br />
+            <input class="btn btn-primary" type="submit" name="form" value="Submit" />
+        </form>
+
+</div>
+{% endblock %}

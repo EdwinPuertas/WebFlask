@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="page-header">,
+    <h2>
+        {% for line in value %}
+            {{ line }}
+            <br />
+        {% endfor %}
+    </h2>
+
+</div>
+{% endblock %}
