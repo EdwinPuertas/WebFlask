@@ -17,10 +17,11 @@ def index():
 
 @app.route('/hello', methods=['POST'])
 def hello():
+    identity = request.form['identity']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    data = ' %s, %s ' % (last_name, first_name)
-    list_person.append(Person(name=first_name, last_name=last_name))
+    data = '%s: %s, %s' % (identity, last_name, first_name)
+    list_person.append(Person(id=int(identity), name=first_name, last_name=last_name))
     return render_template('hello.html', value=data)
 
 
@@ -31,7 +32,7 @@ def people():
 
 @app.route('/book')
 def book():
-    aut1 = Person(name="Christopher", last_name="M.Bishop")
+    aut1 = Person(id=112233, name="Christopher", last_name="M.Bishop")
     book = Book(code="0387310738", title="Pattern Recognition and Machine Learning", editorial="Springer",
                 pages=738, authors=[aut1], theme="Information Science and Statistics", isbn="978-0387310732")
     return render_template('book.html', value=str(book).split('\n'))
@@ -39,7 +40,7 @@ def book():
 
 @app.route('/document')
 def document():
-    aut1 = Person(name="Edwin", last_name="Puertas")
+    aut1 = Person(id=1234567, name="Edwin", last_name="Puertas")
     doc = Document(code="0234456", title="New Document", editorial="Springer",
                    pages=100, authors=[aut1], theme="Statistics")
     return render_template('document.html', value=str(doc))
