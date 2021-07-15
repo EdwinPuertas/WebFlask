@@ -1,13 +1,44 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<div class="page-header">,
-    <h2>
-        {% for line in value %}
-            {{ line }}
-            <br />
-        {% endfor %}
-    </h2>
 
-</div>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="input_code">Code</label>
+      <input type="text" class="form-control" id="input_code" placeholder="Book's code" name="input_code">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="input_title">Title</label>
+      <input type="text" class="form-control" id="input_title" placeholder="Book's title" name="input_title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input_editorial">Editorial</label>
+    <input type="text" class="form-control" id="input_editorial" placeholder="Editorial" name="input_editorial">
+  </div>
+  <div class="form-group">
+    <label for="input_pages">Pages</label>
+    <input type="text" class="form-control" id="input_pages" name="input_pages" placeholder="00">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="input_theme">Theme</label>
+      <input type="text" class="form-control" id="input_theme" name="input_theme">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="input_authors">Authors</label>
+      <select id="input_authors" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="input_isbn">ISBN</label>
+      <input type="text" class="form-control" id="input_isbn" name="input_isbn">
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" name="form_book">Submit</button>
+</form>
 {% endblock %}

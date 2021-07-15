@@ -1,16 +1,11 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<div class="page-header">,
+<ul class="list-group">
+    {% for line in value %}
+    <li class="list-group-item">ID:{{ line[0] }} <br>Name: {{ line[1]}} <br>Last Name: {{ line[2]}}</li>
+    {% endfor %}
+</ul>
 
-        {% for line in value %}
 
-            <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <p class="card-text">{{ line }}</p>
-          </div>
-        </div>
-        {% endfor %}
-
-</div>
 {% endblock %}

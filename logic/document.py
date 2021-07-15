@@ -1,4 +1,4 @@
-from logic.Person import Person
+from logic.person import Person
 from typing import List
 
 
@@ -182,7 +182,7 @@ class Document(object):
 
 
 if __name__ == '__main__':
-    from logic.Person import Person
+    from logic.person import Person
 
     aut1 = Person(name="Edwin", last_name="Puertas")
     doc = Document(code="0234456", title="New Document", editorial="Springer",

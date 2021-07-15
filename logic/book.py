@@ -1,7 +1,7 @@
 from typing import List
 
-from logic.Document import Document
-from logic.Person import Person
+from logic.document import Document
+from logic.person import Person
 
 
 class Book(Document):
@@ -39,7 +39,7 @@ class Book(Document):
 
 
 if __name__ == '__main__':
-    from logic.Person import Person
+    from logic.person import Person
 
     aut1 = Person(name="Christopher", last_name="M.Bishop")
     book = Book(code="0387310738", title="Pattern Recognition and Machine Learning", editorial="Springer",
