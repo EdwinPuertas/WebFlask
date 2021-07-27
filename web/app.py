@@ -7,7 +7,6 @@ from logic.ado import ADO
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
-# list_person = list()
 
 
 @app.route("/")
@@ -15,18 +14,40 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/hello', methods=['POST'])
-def hello():
+@app.route('/person', methods=['GET'])
+def person():
+    return render_template('person.html')
+
+
+@app.route('/person_update/<id_person>', methods=['GET'])
+def person_update(id_person):
+    return render_template('person_update.html', id_person=id_person)
+
+
+@app.route('/person_detail', methods=['POST'])
+def person_detail():
     ado = ADO()
+    op = request.form['op']
     id_person = request.form['id_person']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    # data = ' %s, %s ' % (last_name, first_name)
-    # list_person.append(Person(name=first_name, last_name=last_name))
-    sql = "INSERT INTO person (idperson, name, last_name) VALUES (%s, %s, %s)"
-    values = (int(id_person), first_name, last_name)
-    data = ado.dml(sql=sql, val=values)
-    return render_template('hello.html', value=data)
+    if op == 'I':
+        sql = "INSERT INTO person (idperson, name, last_name) VALUES (%s, %s, %s)"
+        values = (int(id_person), first_name, last_name)
+        data = ado.dml(sql=sql, val=values, op='I')
+    elif op == 'U':
+        sql = 'UPDATE person SET name={0}{2}{0}, last_name={0}{3}{0} WHERE idperson={1}'.format('"', int(id_person),
+                                                                                                first_name, last_name)
+        data = ado.dml(sql=sql, op='U')
+    return render_template('person_detail.html', value=data)
+
+
+@app.route('/person_delete/<id_person>', methods=['GET'])
+def person_delete(id_person):
+    ado = ADO()
+    sql = 'DELETE FROM person WHERE idperson={0}'.format(int(id_person))
+    data = ado.dml(sql=sql, op='D')
+    return render_template('person_detail.html', value=data)
 
 
 @app.route('/people')
@@ -60,6 +81,11 @@ def document():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 
 if __name__ == '__main__':

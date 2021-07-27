@@ -28,14 +28,22 @@ class ADO(object):
             self.conn.close()
             print("Close connection")
 
-    def dml(self, sql: str, val: str):
+    def dml(self, sql: str, val: str = '', op: str = 'I'):
         try:
-            result = "Insert Successful"
-            self.cursor.execute(sql, val)
+            resp = 'Successful'
+            if op == 'I':
+                resp = "Insert Successful"
+                self.cursor.execute(sql, val)
+            elif op == 'U':
+                resp = "Update Successful"
+                self.cursor.execute(sql)
+            elif op == 'D':
+                resp = "Delete Successful"
+                self.cursor.execute(sql)
+            elif self.cursor.rowcount is None:
+                resp = "DML Problem"
             self.conn.commit()
-            if self.cursor.rowcount is None:
-                result = "Insert Problem"
-            return result
+            return resp
         except Error as e:
             print(e)
         finally:
